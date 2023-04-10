@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./Python计算实验一/swampy4py3"
+    ]
+}
