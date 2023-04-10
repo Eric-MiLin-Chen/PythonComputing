@@ -80,14 +80,15 @@ if __name__ == '__main__':
     结果分别为：
 
 <div align="center">
-    <img src="./../Pic/circle.png" height="200px" alt="circle(bob, radius)" >
-    <img src="./../Pic/square.png" height="200px" alt="square(bob, length)" >
-    <img src="./../Pic/ployline.png" height="200px" alt="polyline(bob, n = 5, length = length, angle = 100)" >
+    <img src="./Pic/circle.png" height="200px" alt="circle(bob, radius)" >
+    <img src="./Pic/square.png" height="200px" alt="square(bob, length)" >
+    <img src="./Pic/ployline.png" height="200px" alt="polyline(bob, n = 5, length = length, angle = 100)" >
 </div>
 
+
 <div align="center">
-    <img src="./../Pic/ploygon.png" height="200px" alt="polygon(bob, n = 5, length = length)" >
-    <img src="./../Pic/arc.png" height="200px" alt="arc(bob, r = radius, angle = 90)" >
+    <img src="./Pic/ploygon.png" height="200px" alt="polygon(bob, n = 5, length = length)" >
+    <img src="./Pic/arc.png" height="200px" alt="arc(bob, r = radius, angle = 90)" >
 </div>
 
 
