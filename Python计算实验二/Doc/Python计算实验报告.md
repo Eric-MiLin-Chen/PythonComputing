@@ -147,12 +147,6 @@ snowflake(bob, 1200, 3, 85, True)
 <center><img src="../Img/Cesa%CC%80ro%20fractal%20(85%C2%B0).png" alt="Cesàro fractal (85°)" style="zoom: 33%; algin: center" /></center>
 <center>图1 Cesàro fractal (85°)</center>
 
-
-
-
-
-
-
 ### **生日相同情形的概率分析:**
 
 （1）生成M(M>=1000)个班级，每个班级有N名同学，用`input`接收M和N；
