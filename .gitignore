@@ -1,0 +1,8 @@
+分组/
+.DS_Store
+.ipynb_checkpoints
+.vscode
+*.zip
+*陈诺*.doc
+*陈诺*.docx
+*陈诺*.pdf
