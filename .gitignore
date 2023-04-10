@@ -1,2 +1,4 @@
 分组/
-
+.gitignore
+\S*.vscode$
+\S*..ipynb_checkpoints/$
