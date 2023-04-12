@@ -278,7 +278,7 @@ def ReducableWord(word: str, alphabet: set[str]):
 ​		`word[:i] + word[i + 1:]`：将单词`word`的第`i`个字母删除。
 ​		`ReducableWord(word: str, alphabet: set[str])`函数分析：
 ​		对于长度为n的单词`word`，逐个删除第`i`个字符，生成长度为n - 1的`reduced_word`，若其等于`'a'`或`'i'`或存在于`alphabet`中，则继续递归并返回`True`；否则返回`False`退出递归。直至`word`等于`'a'`或`'i'`或存在于`reducable_words`中(该单词为可缩减单词，不必继续运行)，退出递归并返回`True`。
-​		经计算得，word.txt中共有9767个可缩减单词。
+​		经计算得，word.txt中共有9767个可缩减单词，其中最长的可缩减单词为`complecting`。
 
 ## **测试用例：**
 
