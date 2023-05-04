@@ -15,8 +15,8 @@ def has_duplicates(t):
     False otherwise."""
     s = t[:]
     s.sort()
-    for i in range(len(s)-1):
-        if s[i] == s[i+1]:
+    for i in range(len(s) - 1):
+        if s[i] == s[i + 1]:
             return True
     return False
 
@@ -46,6 +46,6 @@ num_students = 23
 num_simulations = 1000
 count = count_matches(num_students, num_simulations)
 
-print('After %d simulations' % num_simulations)
-print('with %d students' % num_students)
-print('there were %d simulations with at least one match' % count)
+print("After %d simulations" % num_simulations)
+print("with %d students" % num_students)
+print("there were %d simulations with at least one match" % count)

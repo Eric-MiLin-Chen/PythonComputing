@@ -12,15 +12,29 @@ import random
 
 class Card(object):
     """Represents a standard playing card.
-    
+
     Attributes:
       suit: integer 0-3
       rank: integer 1-13
     """
 
     suit_names = ["Clubs", "Diamonds", "Hearts", "Spades"]
-    rank_names = [None, "Ace", "2", "3", "4", "5", "6", "7", 
-              "8", "9", "10", "Jack", "Queen", "King"]
+    rank_names = [
+        None,
+        "Ace",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "Jack",
+        "Queen",
+        "King",
+    ]
 
     def __init__(self, suit=0, rank=2):
         self.suit = suit
@@ -28,8 +42,7 @@ class Card(object):
 
     def __str__(self):
         """Returns a human-readable string representation."""
-        return '%s of %s' % (Card.rank_names[self.rank],
-                             Card.suit_names[self.suit])
+        return "%s of %s" % (Card.rank_names[self.rank], Card.suit_names[self.suit])
 
     def __cmp__(self, other):
         """Compares this card to other, first by suit, then rank.
@@ -40,21 +53,23 @@ class Card(object):
         t1 = self.suit, self.rank
         t2 = other.suit, other.rank
         return cmp(t1, t2)
-##        if self.suit > other.suit:
-##            return 1
-##        if self.suit < other.suit:
-##            return -1
-##        if self.rank > other.rank:
-##            return 1
-##        if self.rank < other.rank:
-##            return -1
-##        return 0
+
+    ##        if self.suit > other.suit:
+    ##            return 1
+    ##        if self.suit < other.suit:
+    ##            return -1
+    ##        if self.rank > other.rank:
+    ##            return 1
+    ##        if self.rank < other.rank:
+    ##            return -1
+    ##        return 0
 
     def __getitem__(self, index):
-        if index==0:
+        if index == 0:
             return self.suit
-        if index==1:
+        if index == 1:
             return self.rank
+
 
 class Deck(object):
     """Represents a deck of cards.
@@ -62,7 +77,7 @@ class Deck(object):
     Attributes:
       cards: list of Card objects.
     """
-    
+
     def __init__(self):
         self.cards = []
         for suit in range(4):
@@ -74,7 +89,7 @@ class Deck(object):
         res = []
         for card in self.cards:
             res.append(str(card))
-        return '\n'.join(res)
+        return "\n".join(res)
 
     def add_card(self, card):
         """Adds a card to the deck."""
@@ -97,7 +112,7 @@ class Deck(object):
 
     def sort(self):
         """Sorts the cards in ascending order."""
-        self.cards.sort(key=lambda x:(x[0],x[1]))
+        self.cards.sort(key=lambda x: (x[0], x[1]))
 
     def move_cards(self, hand, num):
         """Moves the given number of cards from the deck into the Hand.
@@ -111,14 +126,14 @@ class Deck(object):
 
 class Hand(Deck):
     """Represents a hand of playing cards."""
-    
-    def __init__(self, label=''):
+
+    def __init__(self, label=""):
         self.cards = []
         self.label = label
 
 
 def find_defining_class(obj, method_name):
-    """Finds and returns the class object that will provide 
+    """Finds and returns the class object that will provide
     the definition of method_name (as a string) if it is
     invoked on obj.
 
@@ -131,12 +146,12 @@ def find_defining_class(obj, method_name):
     return None
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     deck = Deck()
     deck.shuffle()
 
     hand = Hand()
-    print(find_defining_class(hand, 'shuffle'))
+    print(find_defining_class(hand, "shuffle"))
 
     deck.move_cards(hand, 5)
     hand.sort()

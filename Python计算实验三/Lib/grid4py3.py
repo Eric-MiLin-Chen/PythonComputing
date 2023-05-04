@@ -22,21 +22,21 @@ def do_four(f):
 
 
 def print_beam():
-    print('+ - - - -', end='')
+    print("+ - - - -", end="")
 
 
 def print_post():
-    print('|        ', end='')
+    print("|        ", end="")
 
 
 def print_beams():
     do_twice(print_beam)
-    print('+')
+    print("+")
 
 
 def print_posts():
     do_twice(print_post)
-    print('|')
+    print("|")
 
 
 def print_row():
@@ -55,6 +55,7 @@ print_grid()
 # here is a less-straightforward solution to the
 # four-by-four grid
 
+
 def one_four_one(f, g, h):
     f()
     do_four(g)
@@ -62,19 +63,19 @@ def one_four_one(f, g, h):
 
 
 def print_plus():
-    print('+', end="")
+    print("+", end="")
 
 
 def print_dash():
-    print('-', end="")
+    print("-", end="")
 
 
 def print_bar():
-    print('|', end="")
+    print("|", end="")
 
 
 def print_space():
-    print(' ', end="")
+    print(" ", end="")
 
 
 def print_end():

@@ -14,14 +14,14 @@ def make_word_dict():
     """Reads the words in words.txt and returns a dictionary
     that contains the words as keys."""
     d = dict()
-    fin = open('./Data/words.txt')
+    fin = open("./Data/words.txt")
     for line in fin:
         word = line.strip().lower()
         d[word] = word
 
     # have to add single letter words to the word list;
     # also, the empty string is considered a word.
-    for letter in ['a', 'i', '']:
+    for letter in ["a", "i", ""]:
         d[letter] = letter
     return d
 
@@ -31,7 +31,7 @@ to be reducible to a list of its reducible children.  It starts
 with the empty string."""
 
 memo = {}
-memo[''] = ['']
+memo[""] = [""]
 
 
 def is_reducible(word, word_dict):
@@ -39,7 +39,7 @@ def is_reducible(word, word_dict):
 
     Also adds an entry to the memo dictionary.
 
-    A string is reducible if it has at least one child that is 
+    A string is reducible if it has at least one child that is
     reducible.  The empty string is also reducible.
 
     word: string
@@ -70,7 +70,7 @@ def children(word, word_dict):
     """
     res = []
     for i in range(len(word)):
-        child = word[:i] + word[i+1:]
+        child = word[:i] + word[i + 1 :]
         if child in word_dict:
             res.append(child)
     return res
@@ -115,10 +115,10 @@ def print_longest_words(word_dict):
     # print the longest 5 words
     for length, word in t[0:5]:
         print_trail(word)
-        print('\n')
+        print("\n")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     start_time = time.time()
     word_dict = make_word_dict()
     print_longest_words(word_dict)

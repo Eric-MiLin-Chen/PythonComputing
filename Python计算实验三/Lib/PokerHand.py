@@ -11,7 +11,6 @@ from Card import *
 
 
 class PokerHand(Hand):
-
     def suit_hist(self):
         """Builds a histogram of the suits that appear in the hand.
 
@@ -23,7 +22,7 @@ class PokerHand(Hand):
 
     def has_flush(self):
         """Returns True if the hand has a flush, False otherwise.
-      
+
         Note that this works correctly for hands with more than 5 cards.
         """
         self.suit_hist()
@@ -33,7 +32,7 @@ class PokerHand(Hand):
         return False
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # make a deck
     deck = Deck()
     deck.shuffle()
@@ -45,5 +44,4 @@ if __name__ == '__main__':
         hand.sort()
         print(hand)
         print(hand.has_flush())
-        print('')
-
+        print("")
