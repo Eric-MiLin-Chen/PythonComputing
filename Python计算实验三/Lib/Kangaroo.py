@@ -42,6 +42,6 @@ kanga.put_in_pouch("car keys")
 kanga.put_in_pouch(roo)
 
 print(kanga)
-
+print(roo)
 # If you run this program as is, it seems to work.
 # To see the problem, trying printing roo.
