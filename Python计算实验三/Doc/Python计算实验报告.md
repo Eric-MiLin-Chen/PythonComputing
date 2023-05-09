@@ -158,13 +158,24 @@ Output:
 
 ##### **函数/代码分析：**
 
-以第一个`print_grid()`函数为例，通过绘制流程图，我们可以清楚的理解Python函数的调用机制：
-
-<center><img src="../Img/1.1.1.png" alt="1.1.1" style="zoom: 50%; algin: center" /></center>
-<center>图1 Python运行流程 函数定义</center>
-
-<center><img src="../Img/1.1.2.png" alt="1.1.2" style="zoom: 50%; algin: center" /></center>
-<center>图2 Python运行流程 函数调用与嵌套</center>
+<table style="border: 0;">
+    <tr>
+        <td>
+        	<img src="../Img/1.1.1.png" alt="1.1.1" height="500" />
+        </td>
+        <td>
+        	<img src="../Img/1.1.2.png" alt="1.1.2" height="500" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            图1 Python运行流程 函数定义
+        </td>
+        <td>
+        	图2 Python运行流程 函数调用与嵌套
+        </td>
+    </tr>
+</table>
 
 与个人实现的函数对比，模版函数通过定义`do_twice()`、`do_four()`、`do_twice()`、`onefourone()`等以函数为参数的函数，合理利用函数嵌套，简化了编写过程，增强可读性，在设计过程中需要对函数调用有清楚的理解才能设计出更好的程序。
 
@@ -450,7 +461,7 @@ Removed Dicts:
 定义通用去重函数`RmRepeated(items, key = None)`，使用`set`以判断当前元素是否已出现，若尚未出现则将其加入`set`并使用`yeild`返回以节省内存空间。然而由于`set`结构仅适用于可哈希对象，因此，对于元素为普通数据结构的`list`去重时，由于`list`元素无特定格式，因此只需要直接读取；而对于元素为`dict`或`list`的`list`，由于元素本身不可哈希，因此在存入`set`中时需要根据`key`将元素转化为可哈希类型。以`dict`元素为例，由于键值对一一对应，因此转化为可哈希对象后也需要一一对应，因此分别将其`keys`与`values`转化为`tuple`对象，并将两个`tuple`对象放入一个`tuple`对象中，其对应的`lambda`表达式为：`lambda dic: (tuple(dic.values()), tuple(dic.values()))`，如果是`list`元素，则其对应的`lambda`表达式应为`lambda lst: tuple(lst)`。
 此外，通过使用`yield`返回去重对象，减少内存开销。
 
-#### **类编写**
+#### **Time类编写**
 
  编写拥有
 		a、对像成员`hour`，`minute`和`second`的时间类`Time`；
@@ -561,13 +572,68 @@ shark give me the paper give me the paper and me the paper and listenfor the pap
 
 ##### **程序设计特点**
 
-
+定义了4个类：`Customer` 顾客类，`Employee` 商户类，`Food` 食物类以及`Lunch` 订餐管理，实现类的嵌套调用。
 
 ##### **函数测试**
 
+```python
+def main():
+    customer = Customer('Yui')
+    employee = Employee('KFC')
+    lunch = Lunch(customer, employee)
+    while True:
+        print('''
+订餐系统：
+1.订餐 
+2.查看所有
+0.退出
+        '''.strip())
+        choice = input('请选择功能: ')
+        if choice == '0':
+            break
+        elif choice == '1':
+            name = input('请输入食物名称: ')
+            lunch.order(name)
+        elif choice == '2':
+            for i in lunch.result():
+                print(i._FoodName)
+                
+'''
+Output:
+订餐系统：
+1.订餐 
+2.查看所有
+0.退出
+请选择功能: 1
+请输入食物名称: 老八小憨包
+订餐系统：
+1.订餐 
+2.查看所有
+0.退出
+请选择功能: 1
+请输入食物名称: 铁锅炖自己
+订餐系统：
+1.订餐 
+2.查看所有
+0.退出
+请选择功能: 2
+老八小憨包
+铁锅炖自己
+订餐系统：
+1.订餐 
+2.查看所有
+0.退出
+请选择功能: 0
+'''
+```
+
 ##### **函数/代码分析**
 
-
+`Food`：包含了食物名字符串成员`_FoodName`与点单完成判断成员`_Complete`；
+`Customer`：包含成员`_CustomerName`和方法`place_order(_FoodName: str) -> Food`；
+`Employee`：包含成员`_EmployeeName`和方法`take_order(_Food: Food) -> None`，其方法作用为标记`Food`对象为已完成点单；
+`Lunch`类包含`_customer: Customer`、`_employee: Employee`和`_orders: list[Food]`实例，具有下单`order`方法：要求`Customer`实例调用自身的`place_order`向`Employee`对象要求下单，并且获得`Employee`对象调用`take_order`生成和返回一个`Food`对象；具有返回已完成点单的`Food`列表`result`的方法：返回`_orders: list[Food]`
+调用关系如下：`Lunch.order—〉Customer.placeOrder—〉Employee.takeOrder—〉Food`
 
 #### **编制系列单词处理函数**
 
@@ -581,16 +647,78 @@ shark give me the paper give me the paper and me the paper and listenfor the pap
 
 ##### **程序设计特点**
 
+使用正则表达式处理字符串，使字符判断规则定义更简洁。
+
 ##### **函数测试**
+
+```python
+def main() -> None:
+    src_dir = sys.path[0]
+    data_dir = "./../Data"
+    file_name = "words.txt"
+
+    words_useall_aeiou = []
+    words_hasnoe = []
+    words_isabecedarian = []
+    with open(src_dir + "/" + data_dir + "/" + file_name, "r") as file:
+        words = set(file.read().split())
+        for word in words:
+            words_useall_aeiou.append(word) if useall(word, "aeiou") else None
+            words_hasnoe.append(word) if hasnoe(word) else None
+            words_isabecedarian.append(word) if isabecedarian(word) else None
+
+    teststr = "ILovePython"
+
+    print('rotate(\"ILovePython)\" by 5:', rotateword(teststr, 5))
+    print('rotate(\"ILovePython)\" by 30:', rotateword(teststr, 30))
+    print("avoids(\"ILovePython\", \"abcd\"):", avoids(teststr, "abcd"))
+    print("avoids(\"ILovePython\", \"abcdo\"):", avoids(teststr, "abcdo"))
+    print("useonly(\"ILovePython\", \"abcde\"):", useonly(teststr, "abcde"))
+    print("useonly(\"ILovePython\", \"a-zA-Z\"):", useonly(teststr, "a-zA-Z"))
+    print("useall(\"ILovePython\", \"LoveU\"):", useall(teststr, "LoveU"))
+    print("useall(\"ILovePython\", \"Love\"):", useall(teststr, "Love"))
+    print("hasnoe(\"task\"):", hasnoe("task"))
+    print("hasnoe(\"ILovePython\"):", hasnoe(teststr))
+    print("isabecedarian(\"ILovePython\"):", isabecedarian(teststr))
+    print("isabecedarian(\"abcdhlz\"):", isabecedarian("abcdhlz"))
+    print("Words use all aeiou:", words_useall_aeiou)
+    print(f"Percents of words has no e: {len(words_hasnoe) / len(words) * 100: .2f}%")
+    print("Words is abecedarian:", words_isabecedarian)
+    return
+
+'''
+Output:
+rotate("ILovePython)" by 5: NQtajUdymts
+rotate("ILovePython)" by 30: MPsziTcxlsr
+avoids("ILovePython", "abcd"): False
+avoids("ILovePython", "abcdo"): True
+useonly("ILovePython", "abcde"): False
+useonly("ILovePython", "a-zA-Z"): True
+useall("ILovePython", "LoveU"): False
+useall("ILovePython", "Love"): True
+hasnoe("task"): True
+hasnoe("ILovePython"): False
+isabecedarian("ILovePython"): False
+isabecedarian("abcdhlz"): True
+Words use all aeiou: ['hallucinogenic', 'fastiduousness', ...]
+Percents of words has no e:  33.07%
+Words is abecedarian: ['bis', 'ado', 'jo', ...]
+'''
+```
 
 ##### **函数/代码分析**
 
-
+`rotateword(strsrc: str, n: int) -> str`：遍历输入字符串，如果当前字符属于大/小写字母，则获取其对于`"A"`/`"a"`的ASCII偏移量，而后加上`n`并对26取模，最后重新加上`"A"`/`"a"`的ASCII码值；
+`avoids(strsrc: str, avoidchar: str) -> bool`：使用正则表达式`"[{avoidchar}]"`作为匹配条件，如果成功匹配则表明该单词含有禁止字母，返回`True`；
+`useonly(strsrc: str, availablechar: str) -> bool`：使用正则表达式`"^[{availablechar}]*$"`作为匹配条件，匹配对象为全由`abailablechar`字符串中的字母组成的单词，从传入字符串的开始匹配到其结尾，如果匹配成功则表明该单词仅仅由允许字母组成，返回`True`；
+`useall(strsrc: str, availablechar: str) -> bool`：通过遍历`abailablechar`，如果其中的字母在目标单词中（使用`in`），则继续运行，否则返回`False`，若遍历结束仍未返回，表明该单词包含了所有需要字母组成，返回`True`；
+`hasnoe(strsrc: str) -> bool`：调用`avoids(strsrc, "e")`，若返回值为`True`则说明单词存在e，返回`False`，反之亦然；
+`isabecedarian(strsrc: str) -> bool`：遍历单词，判断其字母的ASCII码是否递增，若出现后继字母小于前字母，则返回`Flase`，直到遍历完成，返回`True`；
 
 ## **测试用例：**
 
- 无
+本次实验中第2.3题的训练用例为`emma.txt`，第2.5题的测试用例为`words.txt`。
 
 ## **收获与体会**
 
- 通过本次实验，我对 Python 的流程控制，科学计算、库函数使用、递归函数设计有了一定的理解，通过练习与实验，我深刻的体会到即使是相同功能，程序也需要调用合适的运行库才能更好更快的完成计算。
+ 通过本次实验，我对 Python 的流程控制，第三方库的调用、泛函数、函数嵌套、灵活利用基础数据结构进行算法设计与完整的Python类编写有了更深一步的理解，通过练习与实验，我深刻的体会到当设计一个程序时，应当从其数据结构入手了解。
